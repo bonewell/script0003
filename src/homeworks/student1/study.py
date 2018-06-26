@@ -62,9 +62,9 @@ def print_square_dictionary(n):
 
 
 class Order:
-    def __init__(self, created_at=datetime.datetime.now()):
-        self._created_at = created_at
-        self._id = ""
+    def __init__(self, dt=datetime.datetime.now()):
+        self._created_at = dt
+        self._id = Order._generate_id()
 
     @property
     def created_at(self):
@@ -75,7 +75,7 @@ class Order:
         return self._id
 
     def __lt__(self, other):
-        return self._created_at < other._created_at
+        return self._created_at > other._created_at
 
     @staticmethod
     def _generate_id():
@@ -83,5 +83,5 @@ class Order:
 
     @staticmethod
     def _get_char():
-        choises = string.ascii_uppercase + "0123456789"
-        return random.choise(choises)
+        choices = string.ascii_uppercase + "0123456789"
+        return random.choice(choices)

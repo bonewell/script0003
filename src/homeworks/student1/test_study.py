@@ -46,4 +46,18 @@ def test_create_order():
 def test_compare_orders():
     order1 = study.Order(datetime.datetime(2018, 6, 26, 14, 5, 1))
     order2 = study.Order(datetime.datetime(2018, 6, 26, 14, 5, 2))
-    assert True == (order1 < order2)
+    assert order2 < order1
+
+
+def test_create_order2():
+    o = study.Order()
+    assert hasattr(o, "created_at")
+    assert o._created_at == o.created_at
+    assert hasattr(o, "id")
+    assert len(o.id) == 20
+
+
+def test_compare_orders2():
+    o1 = study.Order()
+    o2 = study.Order()
+    assert o1 > o2
