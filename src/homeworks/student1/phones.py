@@ -1,6 +1,7 @@
+import os
 import random
 import string
-import os
+import types
 
 def create_phone():
     return '9' + ''.join(random.choice(string.digits) for _ in range(9))
@@ -25,3 +26,14 @@ def read_numbers(name):
                     yield phone
     except OSError:
          pass
+
+
+def format_single_number(number):
+    return '+7 ' + '(' + number[0:3] + ') ' + ' '.join([number[3:6], number[6:8], number[8:10]])
+
+
+def format_number(seq):
+    if isinstance(seq, types.GeneratorType):
+        return (format_single_number(number) for number in seq)
+    else:
+        return format_single_number(seq)
