@@ -62,9 +62,10 @@ def print_square_dictionary(n):
 
 
 class Order:
-    def __init__(self, dt=datetime.datetime.now()):
-        self._created_at = dt
+    def __init__(self, dt=None):
+        self._created_at = dt if dt is not None else datetime.datetime.now()
         self._id = Order._generate_id()
+        self._delivery_date = None
 
     @property
     def created_at(self):
@@ -74,8 +75,22 @@ class Order:
     def id(self):
         return self._id
 
+    @property
+    def delivery_date(self):
+        return self._delivery_date
+
+    @delivery_date.setter
+    def delivery_date(self, dt):
+        self._delivery_date = dt
+
+    def print_delivery_date(self):
+        return datetime.date.strftime(self._delivery_date, "%d %b %Y")
+
     def __lt__(self, other):
         return self._created_at > other._created_at
+
+    def __repr__(self):
+        return self._id + '[' + datetime.datetime.strftime(self._created_at, "%d.%m.%Y %H:%M") + ']'
 
     @staticmethod
     def _generate_id():

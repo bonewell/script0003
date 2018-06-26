@@ -1,5 +1,6 @@
 import datetime
 import string
+import time
 import homeworks.student1.study as study
 
 
@@ -47,6 +48,24 @@ def test_compare_orders():
     order1 = study.Order(datetime.datetime(2018, 6, 26, 14, 5, 1))
     order2 = study.Order(datetime.datetime(2018, 6, 26, 14, 5, 2))
     assert order2 < order1
+
+
+def test_delivery_date():
+    order = study.Order()
+    order.delivery_date = datetime.date(2018, 6, 26)
+    assert datetime.date(2018, 6, 26) == order.delivery_date
+
+
+def test_representation():
+    order = study.Order(datetime.datetime(2018, 6, 26, 14, 5, 1))
+    order._id = "abc"
+    assert "abc[26.06.2018 14:05]" == repr(order)
+
+
+def test_print_delivery_date():
+    order = study.Order()
+    order.delivery_date = datetime.date(2018, 7, 1)
+    assert "01 Jul 2018" == order.print_delivery_date()
 
 
 def test_create_order2():
