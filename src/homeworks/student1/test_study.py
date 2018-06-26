@@ -1,3 +1,5 @@
+import datetime
+import string
 import homeworks.student1.study as study
 
 
@@ -32,3 +34,16 @@ def test_square_dictionary():
 
 def test_print_square_dictionary():
     study.print_square_dictionary(7)
+
+
+def test_create_order():
+    order = study.Order(datetime.datetime(2018, 6, 26, 14, 5, 1))
+    assert datetime.datetime(2018, 6, 26, 14, 5, 1) == order.created_at
+    for char in order.id:
+        assert char in string.ascii_uppercase + "0123456789"
+
+
+def test_compare_orders():
+    order1 = study.Order(datetime.datetime(2018, 6, 26, 14, 5, 1))
+    order2 = study.Order(datetime.datetime(2018, 6, 26, 14, 5, 2))
+    assert True == (order1 < order2)
